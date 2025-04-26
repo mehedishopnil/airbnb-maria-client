@@ -5,6 +5,7 @@ import { MdHouseboat } from 'react-icons/md';
 import { GiIsland } from 'react-icons/gi';
 import ResortCard from '../../components/ResortCard/ResortCard';
 import { AuthContext } from '../../provider/AuthProvider';
+import Loading from '../../components/Loading';
 
 const Home = () => {
   const [selectedCategory, setSelectedCategory] = useState('All');
@@ -12,7 +13,7 @@ const Home = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const itemsPerPage = 9;
 
-  const { hotelData } = useContext(AuthContext);
+  const { hotelData, loading } = useContext(AuthContext);
 
   const selectedCategories = ['Tropical', 'Beach', 'Tiny homes', 'Farms', 'Islands'];
 
@@ -23,6 +24,11 @@ const Home = () => {
     'Farms': <FaWarehouse />,
     'Islands': <GiIsland />,
   };
+
+  // Show loading component while data is being fetched
+  if (loading || !hotelData) {
+    return <Loading />;
+  }
 
   const filteredData = hotelData
     .filter((item) => (selectedCategory === 'All' || item.category === selectedCategory))
@@ -78,32 +84,38 @@ const Home = () => {
       </div>
 
       {/* Cards Section */}
-      <div className="w-full grid grid-cols-1 justify-center items-center sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-4 px-2">
-        {filteredData.map((item, index) => (
-          <ResortCard key={index} data={item} />
-        ))}
-      </div>
+      {filteredData.length > 0 ? (
+        <>
+          <div className="w-full grid grid-cols-1 justify-center items-center sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-4 px-2">
+            {filteredData.map((item, index) => (
+              <ResortCard key={index} data={item} />
+            ))}
+          </div>
 
-      {/* Pagination Section */}
-      <div className="flex items-center justify-center my-5 ">
-        <button
-          className="mr-2 px-4 py-2 border rounded-full focus:outline-none"
-          onClick={() => handlePageChange(currentPage - 1)}
-          disabled={currentPage === 1}
-        >
-          {'<'}
-        </button>
-        <span className="mx-2">
-          Page {currentPage} of {totalPages}
-        </span>
-        <button
-          className="ml-2 px-4 py-2 border rounded-full focus:outline-none"
-          onClick={() => handlePageChange(currentPage + 1)}
-          disabled={currentPage === totalPages}
-        >
-          {'>'}
-        </button>
-      </div>
+          {/* Pagination Section */}
+          <div className="flex items-center justify-center my-5">
+            <button
+              className="mr-2 px-4 py-2 border rounded-full focus:outline-none hover:bg-gray-100 transition-colors"
+              onClick={() => handlePageChange(currentPage - 1)}
+              disabled={currentPage === 1}
+            >
+              {'<'}
+            </button>
+            <span className="mx-2">
+              Page {currentPage} of {totalPages}
+            </span>
+            <button
+              className="ml-2 px-4 py-2 border rounded-full focus:outline-none hover:bg-gray-100 transition-colors"
+              onClick={() => handlePageChange(currentPage + 1)}
+              disabled={currentPage === totalPages}
+            >
+              {'>'}
+            </button>
+          </div>
+        </>
+      ) : (
+        <Loading />
+      )}
     </div>
   );
 };
