@@ -2,6 +2,7 @@ import { useState, useContext, useEffect } from "react";
 import { BsSearch } from "react-icons/bs";
 import ListingCard from "../../components/ListingCard/ListingCard";
 import { AuthContext } from "../../provider/AuthProvider";
+import Loading from "../../components/Loading";
 
 const Listings = () => {
   const { hotelListData, hotelData, loading, user } = useContext(AuthContext);
@@ -59,7 +60,7 @@ const Listings = () => {
               <ListingCard key={item.id} item={item} index={index} />
             ))
           ) : (
-            <p>No listings found.</p>
+            <Loading />
           )
         ) : (
           <p>Please log in to view listings.</p>
