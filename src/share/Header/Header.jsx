@@ -29,7 +29,7 @@ const Header = () => {
           <nav className="hidden md:flex items-center space-x-8">
             <Link to="/" className="text-gray-700 hover:text-gray-900 font-medium transition-colors">Home</Link>
             <Link to="/" className="text-gray-700 hover:text-gray-900 font-medium transition-colors">Bookings</Link>
-            <Link to="hosting-dashboard/listings" className="text-gray-700 hover:text-gray-900 font-medium transition-colors">My Hosting</Link>
+            <Link to="user-panel/listings" className="text-gray-700 hover:text-gray-900 font-medium transition-colors">My Hosting</Link>
             <Link to="/contact" className="text-gray-700 hover:text-gray-900 font-medium transition-colors">Contact</Link>
             
             {isUserLoggedIn ? (
@@ -98,7 +98,7 @@ const Header = () => {
                           Bookings
                         </Link>
                         <Link
-                          to="hosting-dashboard/listings"
+                          to="user-panel/listings"
                           className="block px-4 py-2 text-sm  hover:bg-gray-100"
                           onClick={() => setMobileMenuOpen(false)}
                         >

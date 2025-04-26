@@ -68,7 +68,7 @@ const AuthProvider = ({ children }) => {
     const fetchHotelListData = async () => {
       setLoading(true);
       try {
-        const response = await fetch(`${import.meta.env.VITE_server_link}/hotel-list`);
+        const response = await fetch(`${import.meta.env.VITE_server_link}/hotels-list`);
         if (!response.ok) {
           throw new Error(`Error fetching hotelListData.json: ${response.status} ${response.statusText}`);
         }
