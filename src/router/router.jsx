@@ -4,6 +4,10 @@ import Home from "../pages/Home/Home";
 import Profile from "../pages/Profile/Profile";
 import UserPanel from "../layout/UserPanel/UserPanel";
 import Listings from "../pages/Listings/Listings";
+import Login from "../pages/Login/Login";
+import IndividualEarnings from "../components/IndividualEarnings/IndividualEarnings";
+import Earnings from "../pages/Earnings/Earnings";
+import Reservations from "../pages/Reservations/Reservations";
 
 
 export const router = createBrowserRouter(
@@ -19,6 +23,14 @@ export const router = createBrowserRouter(
                     {
                          path: "/profile",
                          element: <Profile />,
+                    },
+                    {
+                         path: "/login",
+                         element: <Login />,
+                    },
+                    {
+                         path: "individual-earnings/:id",
+                         element: <IndividualEarnings />,
                     }
                ]
           },
@@ -29,6 +41,14 @@ export const router = createBrowserRouter(
                     {
                          path: 'listings',
                          element: <Listings />,
+                    },
+                    {
+                         path: 'reservations',
+                         elements: <Reservations />,
+                    },
+                    {
+                         path: 'earnings',
+                         element: <Earnings />,
                     }
                ]
           }

@@ -24,7 +24,7 @@ const UserPanel = () => {
 
   const navItems = [
     { to: "listings", icon: <HiOutlineHomeModern size={20} />, text: "Listings" },
-    { to: "reservation", icon: <MdOutlineLuggage size={20} />, text: "Reservations" },
+    { to: "reservations", icon: <MdOutlineLuggage size={20} />, text: "Reservations" },
     { to: "earnings", icon: <LiaMoneyBillSolid size={20} />, text: "Earnings" },
     { to: "insights", icon: <TbBrandGoogleAnalytics size={20} />, text: "Insights" },
     { to: "guide-books", icon: <PiBookOpenText size={20} />, text: "Guidebooks" },
