@@ -17,7 +17,7 @@ const AuthProvider = ({ children }) => {
   const [earningList, setEarningList] = useState([]);
   const [usersData, setUsersData] = useState([]);
 
-  console.log(hotelData)
+
 
 
   // Fetch hotel data
@@ -89,7 +89,7 @@ const AuthProvider = ({ children }) => {
     const fetchEarningList = async () => {
       setLoading(true);
       try {
-        const response = await fetch(`${import.meta.env.VITE_server_link}/earningList`);
+        const response = await fetch(`${import.meta.env.VITE_server_link}/earnings`);
         if (!response.ok) {
           throw new Error(`Error fetching earningList.json: ${response.status} ${response.statusText}`);
         }

@@ -10,6 +10,7 @@ import Earnings from "../pages/Earnings/Earnings";
 import Reservations from "../pages/Reservations/Reservations";
 
 
+
 export const router = createBrowserRouter(
      [
           {

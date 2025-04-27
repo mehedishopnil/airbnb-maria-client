@@ -13,14 +13,14 @@ import { AuthContext } from '../../provider/AuthProvider';
 
 
 const Earnings = () => {
-  const { allEarning } = useContext(AuthContext);
+  const {earningList } = useContext(AuthContext);
   const [yearlyEarnings, setYearlyEarnings] = useState([]);
 
   useEffect(() => {
     // Filter and sum earnings for each year across all properties
     const yearlySum = {};
 
-    allEarning.forEach((property) => {
+   earningList.forEach((property) => {
       Object.entries(property.earnings).forEach(([year, amount]) => {
         yearlySum[year] = (yearlySum[year] || 0) + amount;
       });
@@ -34,7 +34,7 @@ const Earnings = () => {
 
     // Set the state with the calculated yearly earnings
     setYearlyEarnings(yearlyEarningsArray);
-  }, [allEarning]);
+  }, [earningList]);
 
   return (
     <div className='container mx-auto my-10'>
