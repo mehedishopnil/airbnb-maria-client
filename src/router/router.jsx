@@ -8,7 +8,7 @@ import Login from "../pages/Login/Login";
 import IndividualEarnings from "../components/IndividualEarnings/IndividualEarnings";
 import Earnings from "../pages/Earnings/Earnings";
 import Reservations from "../pages/Reservations/Reservations";
-
+import NotFoundPage from "../pages/NotFoundPage/NotFoundPage";
 
 
 export const router = createBrowserRouter(
@@ -32,6 +32,10 @@ export const router = createBrowserRouter(
                     {
                          path: "individual-earnings/:id",
                          element: <IndividualEarnings />,
+                    },
+                    {
+                         path: "*",
+                         element: <NotFoundPage />
                     }
                ]
           },
@@ -43,13 +47,14 @@ export const router = createBrowserRouter(
                          path: 'listings',
                          element: <Listings />,
                     },
-                    {
-                         path: 'reservations',
-                         elements: <Reservations />,
-                    },
+                   
                     {
                          path: 'earnings',
                          element: <Earnings />,
+                    },
+                    {
+                         path: 'reservations',
+                         element: <Reservations />,
                     }
                ]
           }

@@ -1,27 +1,41 @@
 import { Link } from "react-router-dom";
 
 const InfoCard = ({ data, showLocation = true, showDate = true, showPrice = true }) => {
-  const { id, price, date, location, image, title, description, category } = data;
+  const { _id, id, price, date, location, image, title, description } = data;
 
   return (
-    <div className="w-[360px] space-y-10 md:w-[500px] lg:w-[500px] p-4 md:gap-5">
-      <Link to=''>
-        <div className="bg-white p-4 rounded-lg shadow-md">
+    <div className="w-full max-w-xs md:max-w-md lg:max-w-md p-4">
+      <div className="bg-white p-4 rounded-lg shadow-md hover:shadow-lg transition">
+        <Link to={`/reservation/${_id || id}`}>
+          <img
+            src={image}
+            alt={`Image for ${title || "Reservation"}`}
+            className="w-full h-48 md:h-64 object-cover rounded-md mb-4"
+          />
+        </Link>
 
-          {/* Exclude category from displaying */}
-          <img src={image} alt={`Image for ${id}`} className="mt-2 w-[350px] h-[200px] md:w-[450px] md:h-[300px] lg:w-[450px] lg:h-[300px] xl:w-[450px] xl:h-[300px] rounded-md" />
-          <p className={`mt-2 text-lg font-semibold text-gray-600 ${!showLocation && 'hidden'}`}>Location: {location}</p>
-          <p className={`mt-2 text-gray-600 ${!showDate && 'hidden'}`}>Date: {date}</p>
-          <p className={`mt-2 text-gray-600 ${!showPrice && 'hidden'}`}>Price: <span className="text-black text-lg">{price}</span></p>
-          {title && <p className="mt-2 text-lg font-semibold text-gray-600">{title}</p>}
-          {description && <p className="mt-2 text-gray-600">{description}</p>}
-          {category && <p className="mt-2 text-gray-600">{category}</p>}
-
-          <div className="flex justify-center">
-            {/* Additional content or actions can be added here */}
-          </div>
-        </div>
-      </Link>
+        {showLocation && (
+          <p className="text-gray-600 mb-1">
+            <span className="font-semibold">Location:</span> {location}
+          </p>
+        )}
+        {showDate && (
+          <p className="text-gray-600 mb-1">
+            <span className="font-semibold">Date:</span> {date}
+          </p>
+        )}
+        {showPrice && (
+          <p className="text-gray-800 font-semibold text-lg mb-2">
+            Price: ${price}
+          </p>
+        )}
+        {title && (
+          <h3 className="text-xl font-bold text-gray-800 mb-2">{title}</h3>
+        )}
+        {description && (
+          <p className="text-gray-600">{description}</p>
+        )}
+      </div>
     </div>
   );
 };
