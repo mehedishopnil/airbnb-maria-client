@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 
 const ResortCard = ({ data }) => {
-  const { id, price, date, location, image } = data;
+  const { id, title, price, date, location, image } = data;
 
   return (
     <div className="w-full">
@@ -24,7 +24,12 @@ const ResortCard = ({ data }) => {
           {/* Card content */}
           <div className="p-4">
             <div className="flex justify-between items-start">
-              <h3 className="text-lg font-semibold text-gray-800 line-clamp-1">{location}</h3>
+              <h3 className="text-lg font-semibold text-gray-800 line-clamp-1">{title}</h3>
+              {/* Rating would go here */}
+            </div>
+
+            <div className="flex justify-between items-start">
+              <h3 className="text-sm font-semibold text-gray-800 line-clamp-1">{location}</h3>
               {/* Rating would go here */}
             </div>
             

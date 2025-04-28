@@ -3,7 +3,7 @@ import { AuthContext } from '../../provider/AuthProvider';
 import InfoCard from '../../components/InfoCard/InfoCard';
 
 const Reservations = () => {
-     const [filteredData, setFilteredData] = useState([]);
+  const [filteredData, setFilteredData] = useState([]);
   const [selectedFilter, setSelectedFilter] = useState('All');
 
   const { hotelData = [], loading } = useContext(AuthContext);
@@ -17,10 +17,13 @@ const Reservations = () => {
     let filteredData;
 
     if (filter === 'All') {
-      // Filter for 'Farmer' category
-      filteredData = hotelData.filter((item) => item.category === 'Farms');
+      // Show resorts with id between 1 to 8
+      filteredData = hotelData.filter((item) => item.id >= 1 && item.id <= 8);
+    } else if (filter === 'Complete') {
+      // Pick random resorts (you can limit the number if needed)
+      filteredData = [...hotelData].sort(() => 0.5 - Math.random()).slice(0, 5); // showing 5 random resorts
     } else {
-      // Filter data based on other filters
+      // Filter data based on other filters (Upcoming, Canceled)
       filteredData = hotelData.filter((item) => item.category === filter);
     }
 
@@ -30,20 +33,27 @@ const Reservations = () => {
 
   const renderFilteredData = () => {
     if (loading) {
-      // Show loading indicator while data is being fetched
       return <div>Loading...</div>;
     }
 
     if (filteredData.length === 0) {
-      // No results found
       if (selectedFilter === 'Upcoming') {
-        return <div className='flex justify-center md:justify-center mt-10'>
-          <p className='text-lg font-semibold text-center'>You have no upcoming reservations.</p>
-        </div>
+        return (
+          <div className='flex justify-center md:justify-center mt-10'>
+            <p className='text-lg font-semibold text-center'>
+              You have no upcoming reservations.
+            </p>
+          </div>
+        );
       } else {
-        return <div className='flex justify-center mt-10'>
-          <p className='text-lg font-semibold text-center'>No results found.<br></br><span className='font-normal text-gray-600'> Please try a different filter.</span></p>
-        </div>
+        return (
+          <div className='flex justify-center mt-10'>
+            <p className='text-lg font-semibold text-center'>
+              No results found.<br />
+              <span className='font-normal text-gray-600'>Please try a different filter.</span>
+            </p>
+          </div>
+        );
       }
     }
 
@@ -51,8 +61,9 @@ const Reservations = () => {
       <InfoCard key={index} data={item} />
     ));
   };
-     return (
-          <div className="container mx-auto flex flex-col justify-center items-center md:ml-10 mt-5">
+
+  return (
+    <div className="container mx-auto flex flex-col justify-center items-center md:ml-10 mt-5">
       <h2 className="text-xl md:text-3xl font-bold mb-4">Reservations</h2>
 
       {/* Filter Section */}
@@ -63,18 +74,22 @@ const Reservations = () => {
         >
           Upcoming
         </button>
+
+        {/* For the Complete button */}
         <button
           className={`cursor-pointer ${selectedFilter === 'Complete' ? 'text-blue-500 font-bold' : ''}`}
           onClick={() => filterData('Complete')}
         >
           Complete
         </button>
+
         <button
           className={`cursor-pointer ${selectedFilter === 'Canceled' ? 'text-blue-500 font-bold' : ''}`}
           onClick={() => filterData('Canceled')}
         >
           Canceled
         </button>
+
         <button
           className={`cursor-pointer ${selectedFilter === 'All' ? 'text-blue-500 font-bold' : ''}`}
           onClick={() => filterData('All')}
@@ -82,7 +97,8 @@ const Reservations = () => {
           All
         </button>
       </div>
-      <div className='flex justify-center '>
+
+      <div className='flex justify-center'>
         <span className='w-[400px] border border-gray-300'></span>
       </div>
 
